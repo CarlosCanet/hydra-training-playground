@@ -20,9 +20,9 @@ const levelCreds: Record<number, { user: string; pass: string }[]> = {
 };
 
 export function handleLogin(level: number, username: string, password: string, isHuman: boolean): AuthResult {
-  // Honeypot
-  if (!isHuman) {
-    // return { success: true, message: 'Login successfully' };
+  const isHoneypotEnabled = false;
+  if (isHoneypotEnabled && !isHuman) {
+    return { success: true, message: 'Login successfully' };
   }
   
   const creds = levelCreds[level] ?? [];
