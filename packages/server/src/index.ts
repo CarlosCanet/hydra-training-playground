@@ -17,8 +17,8 @@ app.use(morgan('dev'));
 
 const loginSlowDownLimiter = slowDown({
 	windowMs: 60 * 1000, // 60 seconds
-	delayAfter: 3, // Number of querest to go at full-speed.
-	delayMs: (hits) => hits * 100, // Delay
+	delayAfter: 3, // Number of request to go at full-speed.
+	delayMs: (hits: number) => hits * 100, // Delay
 })
 
 const loginRateLimiter = rateLimit({
@@ -27,7 +27,7 @@ const loginRateLimiter = rateLimit({
 	standardHeaders: 'draft-8', // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
   ipv6Subnet: 56, // Set to 60 or 64 to be less aggressive, or 52 or 48 to be more aggressive
-  handler: (req, res) => {
+  handler: (req: Request, res: Response) => {
     return res.status(429).send("Invalid credentials");
   }
 })
@@ -52,7 +52,7 @@ app.post('/login/:level', (req: Request, res: Response) => {
   const newLog = addLog({ clientIP: req.ip ?? "", level, username, password, isHuman , ...result });
   console.log(JSON.stringify(newLog));
   if (result.success) {
-    return res.send(200);
+    return res.sendStatus(200);
   }
   return res.status(400).send(result.message);
 });

@@ -5,7 +5,7 @@ import { LoginAttempt } from "./services/authService";
 
 export function addLog({ level, clientIP, username, password, success, isHuman, message }: LoginAttempt) {
   try {
-    const logDir = path.join(__dirname, "..", "..", "server-logs");
+    const logDir = path.join(__dirname, "..", "server-logs");
     if (!fs.existsSync(logDir)) {
       fs.mkdirSync(logDir, { recursive: true });
     }
